@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Work+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f7f5f0;
+  --color-ink: #0e1626;
+  --color-muted: #525c70;
+  --color-navy: #142544;
+  --color-cta: #b3202a;
+  --color-steel: #dfe4ec;
+
+  --color-barber-paper: #f7f5f0;
+  --color-barber-ink: #0e1626;
+  --color-barber-muted: #525c70;
+  --color-barber-navy: #142544;
+  --color-barber-red: #b3202a;
+  --color-barber-steel: #dfe4ec;
+
+  --font-heading: "Big Shoulders Display", sans-serif;
+  --font-body: "Work Sans", sans-serif;
+}
+
+:root {
+  --background: #f7f5f0;
+  --foreground: #0e1626;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #f7f5f0;
+  color: #0e1626;
+}
+
+body {
+  background-color: #f7f5f0;
+  color: #0e1626;
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Heading Font: 'Big Shoulders Display' exclusively for h1, h2, h3 tags (font-weight 700 or 800) */
+h1, h2, h3 {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #142544;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+h2 {
+  font-weight: 800;
+}
+
+h3 {
+  font-weight: 700;
+}
+
+/* Body font for all other text elements */
+p, span, div, a, button, input, textarea, select, label {
+  font-family: 'Work Sans', sans-serif;
+}
+
+/* Accent selection color */
+::selection {
+  background-color: #b3202a;
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7f5f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dfe4ec;
+  border-radius: 4px;
+  border: 2px solid #f7f5f0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #525c70;
+}
