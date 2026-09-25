@@ -14,6 +14,7 @@ import {
   Sparkles,
   MapPin,
   AlertCircle,
+  ExternalLink,
 } from "lucide-react";
 
 // Exact Services & Pricing Data
@@ -148,7 +149,6 @@ function BookingFormInner() {
   const searchParams = useSearchParams();
   const [confirmedBooking, setConfirmedBooking] = useState<ConfirmedBooking | null>(null);
   const [isProcessingCalendar, setIsProcessingCalendar] = useState(false);
-  const [calendarMessage, setCalendarMessage] = useState<string>("");
 
   const todayStr = new Date().toISOString().split("T")[0];
 
@@ -212,14 +212,37 @@ function BookingFormInner() {
     };
 
     setConfirmedBooking(confirmation);
-    setCalendarMessage("");
   };
 
-  // Smart Add to Calendar: Web Share API (Mobile) + Fallback Download (Desktop)
-  const handleAddToCalendar = async () => {
+  // Generate Google Calendar Link
+  const getGoogleCalendarUrl = () => {
+    if (!confirmedBooking) return "#";
+
+    const [year, month, day] = confirmedBooking.date.split("-").map(Number);
+    const [startHour, startMinute] = confirmedBooking.time.split(":").map(Number);
+
+    const startDate = new Date(year, month - 1, day, startHour, startMinute);
+    const endDate = new Date(startDate.getTime() + confirmedBooking.duration * 60 * 1000);
+
+    const formatGCalDate = (d: Date) =>
+      d.toISOString().replace(/-|:|\.\d\d\d/g, "");
+
+    const dates = `${formatGCalDate(startDate)}/${formatGCalDate(endDate)}`;
+    const title = `${confirmedBooking.serviceName} with ${confirmedBooking.barberName} at Stripe & Steel Barber Co.`;
+    const location = "14 Rivonia Road, Sandton, Johannesburg, 2196";
+    const details = `Appointment: ${confirmedBooking.serviceName}\nPrice: ${confirmedBooking.price}\nBarber: ${confirmedBooking.barberName}\nReference: ${confirmedBooking.reference}\nTo change: 011 555 0142`;
+
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+      title
+    )}&dates=${dates}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(
+      location
+    )}`;
+  };
+
+  // Add to Apple or Outlook Calendar (Blob + window.location.href navigation)
+  const handleAddToAppleOrOutlook = async () => {
     if (!confirmedBooking) return;
     setIsProcessingCalendar(true);
-    setCalendarMessage("");
 
     try {
       const response = await fetch("/api/calendar", {
@@ -243,44 +266,18 @@ function BookingFormInner() {
       }
 
       const icsBlob = await response.blob();
-      const file = new File([icsBlob], "booking.ics", { type: "text/calendar" });
+      const blobUrl = window.URL.createObjectURL(icsBlob);
 
-      // Mobile Route: Web Share API (native iOS / Android share sheet)
-      if (
-        typeof navigator !== "undefined" &&
-        navigator.canShare &&
-        navigator.canShare({ files: [file] })
-      ) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: `${confirmedBooking.serviceName} at Stripe & Steel`,
-            text: `Appointment for ${confirmedBooking.fullName} with ${confirmedBooking.barberName} on ${confirmedBooking.date} at ${confirmedBooking.time}. Reference: ${confirmedBooking.reference}`,
-          });
-          setCalendarMessage("Opened in native calendar");
-          return;
-        } catch (shareErr: unknown) {
-          if (shareErr instanceof Error && shareErr.name === "AbortError") {
-            // User closed the native share sheet
-            return;
-          }
-          // If native sharing failed for another reason, fallback to download
-        }
-      }
+      // Directly set window.location.href to open native device "Add Event" screen
+      window.location.href = blobUrl;
 
-      // Desktop Fallback: Standard a.download anchor link trigger
-      const downloadUrl = window.URL.createObjectURL(icsBlob);
-      const link = document.createElement("a");
-      link.href = downloadUrl;
-      link.download = `booking-${confirmedBooking.reference}.ics`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(downloadUrl);
-      setCalendarMessage("Calendar file downloaded");
+      // Revoke the object URL after a few seconds
+      setTimeout(() => {
+        window.URL.revokeObjectURL(blobUrl);
+      }, 5000);
     } catch (err) {
-      console.error("Error adding to calendar:", err);
-      alert("Unable to process calendar integration. Please try again.");
+      console.error("Error opening calendar event:", err);
+      alert("Unable to open calendar event. Please try again.");
     } finally {
       setIsProcessingCalendar(false);
     }
@@ -381,30 +378,33 @@ function BookingFormInner() {
               </div>
             </div>
 
-            {/* SMART 'ADD TO CALENDAR' ACTION (Web Share API Mobile + Desktop Download Fallback) */}
+            {/* CALENDAR ACTIONS */}
             <div className="pt-2 space-y-3">
+              {/* Primary Button: Add to Apple or Outlook Calendar */}
               <button
                 type="button"
-                onClick={handleAddToCalendar}
+                onClick={handleAddToAppleOrOutlook}
                 disabled={isProcessingCalendar}
-                className="w-full flex items-center justify-center gap-2.5 bg-[#b3202a] hover:bg-[#991b24] text-white font-bold text-base py-4 px-6 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-60"
+                className="w-full flex items-center justify-center gap-2.5 bg-[#b3202a] hover:bg-[#991b24] text-white font-bold text-base py-3.5 px-6 rounded-lg shadow-md hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-60"
               >
                 <Calendar className="w-5 h-5 text-white" />
                 <span>
-                  {isProcessingCalendar ? "Adding to Calendar..." : "Add to Calendar"}
+                  {isProcessingCalendar
+                    ? "Opening Calendar..."
+                    : "Add to Apple or Outlook Calendar"}
                 </span>
               </button>
 
-              {calendarMessage && (
-                <p className="text-xs text-emerald-700 font-semibold text-center flex items-center justify-center gap-1.5 animate-in fade-in">
-                  <CheckCircle className="w-4 h-4 text-emerald-600" />
-                  <span>{calendarMessage}</span>
-                </p>
-              )}
-
-              <p className="text-xs text-[#525c70] text-center leading-relaxed">
-                Instantly syncs with Apple Calendar or Google Calendar on mobile devices, or downloads an .ics file for desktop.
-              </p>
+              {/* Secondary Button: Add to Google Calendar */}
+              <a
+                href={getGoogleCalendarUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 bg-transparent hover:bg-[#142544] text-[#142544] hover:text-white font-bold text-base py-3.5 px-6 rounded-lg border-2 border-[#142544] transition-all"
+              >
+                <ExternalLink className="w-4 h-4" />
+                <span>Add to Google Calendar</span>
+              </a>
             </div>
 
             {/* Book Another Appointment link */}
@@ -413,7 +413,6 @@ function BookingFormInner() {
                 type="button"
                 onClick={() => {
                   setConfirmedBooking(null);
-                  setCalendarMessage("");
                   reset();
                 }}
                 className="text-xs text-[#525c70] hover:text-[#142544] inline-flex items-center gap-1.5 font-semibold transition-colors"
