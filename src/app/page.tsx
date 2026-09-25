@@ -5,7 +5,6 @@ import {
   MapPin,
   Calendar,
   ArrowRight,
-  CheckCircle2,
   Phone,
 } from "lucide-react";
 import Logo from "@/components/Logo";
@@ -16,17 +15,10 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-[#f7f5f0] text-[#0e1626]">
       {/* 1. HERO SECTION */}
       <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 border-b border-[#dfe4ec]">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#142544_1px,transparent_1px)] [background-size:16px_16px]" />
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Left Column: Core Copy */}
             <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#142544]/5 border border-[#dfe4ec] text-[#142544] text-xs font-semibold uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-[#b3202a]" />
-                <span>Established 2019 • Rivonia Road, Sandton</span>
-              </div>
-
               {/* Exact H1 requested */}
               <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold uppercase text-[#142544] leading-[0.95] tracking-tight">
                 Sharp cuts. <br />
@@ -57,29 +49,18 @@ export default function Home() {
                 </Link>
               </div>
 
-              <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-6 text-xs text-[#525c70] font-medium">
-                <span className="inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#b3202a]" />
-                  Dedicated 45-minute slots
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#b3202a]" />
-                  Single-blade razor precision
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#b3202a]" />
-                  No rushing, ever
-                </span>
+              <div className="pt-2 text-sm text-[#525c70]">
+                14 Rivonia Road, Sandton • A rule that nobody gets rushed
               </div>
             </div>
 
             {/* Right Column: Unsplash Image framed with the animated BarberPole */}
             <div className="lg:col-span-6 flex items-center justify-center lg:justify-end gap-5 xl:gap-8">
-              {/* High-Quality Unsplash Image of Modern Barbershop Interior */}
+              {/* High-Quality Unsplash Image of Barbershop Interior */}
               <div className="relative flex-1 min-w-[280px] h-[360px] sm:h-[440px] md:h-[480px] lg:h-[500px] rounded-xl overflow-hidden shadow-2xl border-2 border-[#dfe4ec]">
                 <Image
                   src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=1200&auto=format&fit=crop"
-                  alt="Stripe & Steel Barber Co. Modern Barbershop Interior in Sandton"
+                  alt="Stripe & Steel Barber Co. Sandton"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   priority
@@ -89,7 +70,7 @@ export default function Home() {
                 {/* Atmospheric gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#142544]/85 via-transparent to-black/20 pointer-events-none" />
 
-                {/* Floating atelier badge */}
+                {/* Grounded shop badge */}
                 <div className="absolute bottom-5 left-5 right-5 bg-[#142544]/95 backdrop-blur-md border border-white/20 p-4 rounded-lg flex items-center justify-between text-white shadow-xl">
                   <div className="flex items-center gap-3">
                     <Logo className="w-10 h-10 shrink-0" />
@@ -98,12 +79,12 @@ export default function Home() {
                         Stripe &amp; Steel Barber Co.
                       </span>
                       <span className="text-[11px] text-[#dfe4ec]/80">
-                        Converted Print Shop • 14 Rivonia Road, Sandton
+                        14 Rivonia Road, Sandton
                       </span>
                     </div>
                   </div>
                   <span className="text-xs font-bold bg-[#b3202a] text-white px-3 py-1 rounded uppercase tracking-wider shadow-sm">
-                    Open Today
+                    Open Mon–Sat
                   </span>
                 </div>
               </div>
@@ -173,33 +154,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. FEATURED SERVICES PREVIEW */}
+      {/* 3. SERVICES AND PRICES PREVIEW */}
       <section className="py-16 md:py-24 bg-[#f7f5f0] border-b border-[#dfe4ec]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div className="space-y-2">
-              <span className="text-xs uppercase tracking-widest text-[#b3202a] font-bold font-body block">
-                The Menu
-              </span>
+            <div>
               <h2 className="font-heading text-4xl sm:text-5xl font-extrabold uppercase text-[#142544]">
-                Popular Services
+                Services and prices
               </h2>
             </div>
             <Link
               href="/services"
               className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-bold text-[#142544] hover:text-[#b3202a] transition-colors"
             >
-              <span>View complete price list</span>
+              <span>See all services</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Card 1: Classic haircut */}
             <div className="bg-white border-2 border-[#dfe4ec] rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="font-heading text-2xl font-bold uppercase text-[#142544]">
-                    Classic Haircut
+                    Classic haircut
                   </h3>
                   <span className="font-heading text-2xl font-extrabold text-[#b3202a]">
                     R180
@@ -210,7 +189,7 @@ export default function Home() {
                   <span>45 min</span>
                 </div>
                 <p className="text-sm text-[#525c70] leading-relaxed mb-6 font-body">
-                  Scissor or clipper cut, styled to suit you. Precision taper and tailored styling to fit your profile.
+                  Scissor or clipper cut, styled to suit you.
                 </p>
               </div>
               <Link
@@ -221,14 +200,12 @@ export default function Home() {
               </Link>
             </div>
 
-            <div className="bg-white border-2 border-[#142544] rounded-lg p-6 shadow-md relative flex flex-col justify-between">
-              <span className="absolute -top-3 right-6 bg-[#142544] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded">
-                Barber Pick
-              </span>
+            {/* Card 2: Skin fade */}
+            <div className="bg-white border-2 border-[#dfe4ec] rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="font-heading text-2xl font-bold uppercase text-[#142544]">
-                    Skin Fade
+                    Skin fade
                   </h3>
                   <span className="font-heading text-2xl font-extrabold text-[#b3202a]">
                     R200
@@ -239,7 +216,7 @@ export default function Home() {
                   <span>45 min</span>
                 </div>
                 <p className="text-sm text-[#525c70] leading-relaxed mb-6 font-body">
-                  Clean gradient from skin to length. Blended down to zero with foil shaver precision and foil finish.
+                  Clean gradient from skin to length.
                 </p>
               </div>
               <Link
@@ -250,11 +227,12 @@ export default function Home() {
               </Link>
             </div>
 
+            {/* Card 3: Cut and beard package */}
             <div className="bg-white border-2 border-[#dfe4ec] rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="font-heading text-2xl font-bold uppercase text-[#142544]">
-                    Cut &amp; Beard Package
+                    Cut and beard package
                   </h3>
                   <span className="font-heading text-2xl font-extrabold text-[#b3202a]">
                     R290
@@ -265,7 +243,7 @@ export default function Home() {
                   <span>75 min</span>
                 </div>
                 <p className="text-sm text-[#525c70] leading-relaxed mb-6 font-body">
-                  Haircut plus full beard shape-up. Hot towel application, cheek line razor finish, and botanical beard balm.
+                  Haircut plus full beard shape-up.
                 </p>
               </div>
               <Link
@@ -279,24 +257,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. ABOUT SUMMARY & THE PHILOSOPHY */}
+      {/* 4. ABOUT SUMMARY: STARTED WITH ONE CHAIR */}
       <section className="py-16 md:py-24 bg-white border-b border-[#dfe4ec]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <span className="text-xs uppercase tracking-widest text-[#b3202a] font-bold font-body block">
-                The Heritage
-              </span>
               <h2 className="font-heading text-4xl sm:text-5xl font-extrabold uppercase text-[#142544] leading-tight">
-                Nobody Gets Rushed. <br />
-                That’s The Only Rule.
+                Started with one chair
               </h2>
               <div className="space-y-4 text-base text-[#525c70] font-body leading-relaxed">
                 <p>
-                  We opened in 2019 inside a converted print shop on Rivonia Road. We didn’t want a conveyer-belt salon. We wanted a sanctuary where gentlemen could sit down, unwind, and receive an immaculate haircut or shave from craftsmen who care.
+                  The shop opened in 2019 in a converted print shop on Rivonia Road. We have a rule that nobody gets rushed, and we use single-blade razors for every cut and shave.
                 </p>
                 <p>
-                  Every haircut begins with a consultation, continues with single-blade razor detailing, and concludes with a warm towel and tailored styling tonic.
+                  A proper neighbourhood barbershop in Sandton. Classic cuts, skin fades and hot towel shaves from barbers who take their time.
                 </p>
               </div>
 
@@ -311,38 +285,21 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-[#f7f5f0] border-2 border-[#dfe4ec] rounded-lg p-8 space-y-6">
+            <div className="bg-[#f7f5f0] border-2 border-[#dfe4ec] rounded-lg p-8 space-y-4">
               <h3 className="font-heading text-2xl font-bold uppercase text-[#142544] border-b border-[#dfe4ec] pb-3">
-                What Sandton Says
+                14 Rivonia Road, Sandton
               </h3>
-
-              <div className="space-y-5">
-                <div className="border-l-4 border-[#b3202a] pl-4 space-y-1">
-                  <p className="text-sm italic text-[#0e1626] font-body">
-                    “Thabo is a master with the clippers. I’ve lived in Johannesburg for 12 years and have never had a cleaner fade.”
-                  </p>
-                  <span className="text-xs text-[#525c70] font-semibold block">
-                    — Marco D., Sandton City
-                  </span>
-                </div>
-
-                <div className="border-l-4 border-[#142544] pl-4 space-y-1">
-                  <p className="text-sm italic text-[#0e1626] font-body">
-                    “Liam’s hot towel shave is an essential Friday ritual before the weekend. Unhurried, impeccably clean, and pure relaxation.”
-                  </p>
-                  <span className="text-xs text-[#525c70] font-semibold block">
-                    — David K., Morningside
-                  </span>
-                </div>
-
-                <div className="border-l-4 border-[#b3202a] pl-4 space-y-1">
-                  <p className="text-sm italic text-[#0e1626] font-body">
-                    “Took my 7-year-old son to Sipho. First time my boy actually enjoyed a cut without fidgeting. Brilliant with kids.”
-                  </p>
-                  <span className="text-xs text-[#525c70] font-semibold block">
-                    — Sean T., Bryanston
-                  </span>
-                </div>
+              <p className="text-sm text-[#525c70] leading-relaxed">
+                Open Monday to Friday 09:00 to 18:00, Saturday 08:00 to 15:00. Closed Sundays.
+              </p>
+              <div className="pt-2">
+                <Link
+                  href="/booking"
+                  className="inline-flex items-center gap-2 bg-[#b3202a] hover:bg-[#991b24] text-white font-semibold text-sm px-6 py-3 rounded-lg transition-colors shadow-sm"
+                >
+                  <Calendar className="w-4 h-4 text-white" />
+                  <span>Book your chair</span>
+                </Link>
               </div>
             </div>
           </div>
@@ -354,10 +311,10 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <Logo className="w-16 h-16 mx-auto shadow-md" />
           <h2 className="font-heading text-4xl sm:text-5xl font-extrabold uppercase text-white tracking-tight">
-            Reserve Your Chair Today
+            Book your chair
           </h2>
           <p className="font-body text-base sm:text-lg text-[#dfe4ec]/90 max-w-xl mx-auto leading-relaxed">
-            Select your barber, pick your slot, and receive an instant calendar appointment download. Walk-ins subject to availability.
+            A proper neighbourhood barbershop in Sandton. Classic cuts, skin fades and hot towel shaves from barbers who take their time.
           </p>
           <div className="pt-2">
             <Link
@@ -365,7 +322,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 bg-[#b3202a] hover:bg-[#991b24] text-white font-bold text-base px-8 py-4 rounded-lg shadow-lg shadow-[#b3202a]/30 transition-all transform active:scale-[0.98]"
             >
               <Calendar className="w-5 h-5 text-white" />
-              <span>Book Appointment Now</span>
+              <span>Book your chair</span>
             </Link>
           </div>
         </div>

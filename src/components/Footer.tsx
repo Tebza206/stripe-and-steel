@@ -25,8 +25,8 @@ export default function Footer() {
                 <Award className="w-5 h-5 text-[#b3202a]" />
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-white">Master Craftsmen</h4>
-                <p className="text-xs text-[#dfe4ec]/80">State-licensed, competition-certified barbers</p>
+                <h4 className="text-sm font-semibold text-white">Experienced Barbers</h4>
+                <p className="text-xs text-[#dfe4ec]/80">Classic cuts, fades and traditional shaves</p>
               </div>
             </div>
 
@@ -35,8 +35,8 @@ export default function Footer() {
                 <CalendarCheck className="w-5 h-5 text-[#b3202a]" />
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-white">Punctual Scheduling</h4>
-                <p className="text-xs text-[#dfe4ec]/80">Zero queue lag with dedicated 45-min slots</p>
+                <h4 className="text-sm font-semibold text-white">Dedicated Time</h4>
+                <p className="text-xs text-[#dfe4ec]/80">Dedicated 45-minute slots with a rule that nobody gets rushed</p>
               </div>
             </div>
 
@@ -45,8 +45,8 @@ export default function Footer() {
                 <ShieldCheck className="w-5 h-5 text-[#b3202a]" />
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-white">Sanitation Standards</h4>
-                <p className="text-xs text-[#dfe4ec]/80">Medical-grade sterilization & premium grooming</p>
+                <h4 className="text-sm font-semibold text-white">Single-Blade Razors</h4>
+                <p className="text-xs text-[#dfe4ec]/80">Fresh single-use blades for every neck line and shave</p>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function Footer() {
             </div>
 
             <p className="text-[#dfe4ec]/80 text-sm leading-relaxed">
-              Elevating the ritual of classic masculine grooming. We blend traditional straight-razor mastery with contemporary styling in an atmosphere of distinguished comfort.
+              A proper neighbourhood barbershop in Sandton. Classic cuts, skin fades and hot towel shaves from barbers who take their time.
             </p>
 
             <div className="flex items-center gap-3 pt-2">

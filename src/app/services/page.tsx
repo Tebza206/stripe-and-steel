@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Clock, Calendar, Check, Scissors, Sparkles, ShieldCheck } from "lucide-react";
+import { Clock, Calendar, Check } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing | MAXX CUTS Sandton",
+  title: "Services and prices | Stripe & Steel Barber Co. Sandton",
   description:
-    "Explore our complete service menu and pricing in Sandton: Classic haircut (R180), Skin fade (R200), Beard trim and shape (R120), Hot towel shave (R150), and packages.",
+    "Services and prices in Sandton: Classic haircut (R180), Skin fade (R200), Beard trim and shape (R120), Cut and beard package (R290), Hot towel shave (R150), and Kids cut (R130).",
 };
 
 interface ServiceItem {
@@ -14,8 +14,6 @@ interface ServiceItem {
   price: string;
   duration: string;
   description: string;
-  highlight?: boolean;
-  popular?: boolean;
 }
 
 const servicesList: ServiceItem[] = [
@@ -25,7 +23,6 @@ const servicesList: ServiceItem[] = [
     price: "R180",
     duration: "45 min",
     description: "Scissor or clipper cut, styled to suit you.",
-    popular: true,
   },
   {
     id: "skin-fade",
@@ -33,7 +30,6 @@ const servicesList: ServiceItem[] = [
     price: "R200",
     duration: "45 min",
     description: "Clean gradient from skin to length.",
-    popular: true,
   },
   {
     id: "beard-trim-and-shape",
@@ -48,7 +44,6 @@ const servicesList: ServiceItem[] = [
     price: "R290",
     duration: "75 min",
     description: "Haircut plus full beard shape-up.",
-    highlight: true,
   },
   {
     id: "hot-towel-shave",
@@ -72,17 +67,12 @@ export default function ServicesPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header / Intro */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#142544]/5 border border-[#dfe4ec] text-[#142544] text-xs font-bold uppercase tracking-wider font-body">
-            <Scissors className="w-3.5 h-3.5 text-[#b3202a]" />
-            <span>Sandton Atelier Menu</span>
-          </div>
-
           <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold uppercase text-[#142544] tracking-tight">
-            Services & Pricing
+            Services and prices
           </h1>
 
           <p className="font-body text-base sm:text-lg text-[#525c70] leading-relaxed">
-            Honest pricing with zero hidden surcharges. Every chair booking includes a personalized style consultation, neck razor line-up, and complimentary hot towel finish.
+            A proper neighbourhood barbershop in Sandton. Classic cuts, skin fades and hot towel shaves from barbers who take their time.
           </p>
         </div>
 
@@ -91,29 +81,11 @@ export default function ServicesPage() {
           {servicesList.map((service) => (
             <div
               key={service.id}
-              className={`bg-white rounded-lg p-6 sm:p-8 flex flex-col justify-between transition-all duration-200 relative ${
-                service.highlight
-                  ? "border-2 border-[#b3202a] shadow-lg shadow-[#b3202a]/10"
-                  : service.popular
-                  ? "border-2 border-[#142544] shadow-md"
-                  : "border-2 border-[#dfe4ec] shadow-sm hover:shadow-md hover:border-[#142544]/40"
-              }`}
+              className="bg-white rounded-lg p-6 sm:p-8 flex flex-col justify-between transition-all duration-200 border-2 border-[#dfe4ec] shadow-sm hover:shadow-md"
             >
-              {/* Badges */}
-              {service.highlight && (
-                <span className="absolute -top-3.5 left-6 bg-[#b3202a] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-0.5 rounded shadow-sm">
-                  Best Value Combo
-                </span>
-              )}
-              {service.popular && !service.highlight && (
-                <span className="absolute -top-3.5 left-6 bg-[#142544] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-0.5 rounded shadow-sm">
-                  Neighbourhood Favorite
-                </span>
-              )}
-
               <div>
                 {/* Title & Price */}
-                <div className="flex justify-between items-start gap-4 mb-3 pt-2">
+                <div className="flex justify-between items-start gap-4 mb-3">
                   <h2 className="font-heading text-3xl font-extrabold uppercase text-[#142544] leading-tight">
                     {service.name}
                   </h2>
@@ -150,14 +122,14 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        {/* Grooming Standards / FAQ Info Strip */}
+        {/* Grounded Standards Info */}
         <div className="bg-white border-2 border-[#dfe4ec] rounded-lg p-8 sm:p-10 shadow-sm space-y-6">
           <div className="border-b border-[#dfe4ec] pb-4">
             <h3 className="font-heading text-3xl font-extrabold uppercase text-[#142544]">
-              What Is Included In Every Appointment
+              What is included with every cut
             </h3>
             <p className="font-body text-sm text-[#525c70]">
-              The standard we keep for every client in Sandton.
+              A rule that nobody gets rushed.
             </p>
           </div>
 
@@ -167,9 +139,9 @@ export default function ServicesPage() {
                 <Check className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="font-bold text-[#142544] mb-1">Single-Blade Razor Detailing</h4>
+                <h4 className="font-bold text-[#142544] mb-1">Single-Blade Razors</h4>
                 <p className="text-xs text-[#525c70] leading-relaxed">
-                  Necklines and cheek contours are finished with fresh, single-use surgical steel blades.
+                  Necklines and cheek lines finished with fresh single-blade razors.
                 </p>
               </div>
             </div>
@@ -179,9 +151,9 @@ export default function ServicesPage() {
                 <Check className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="font-bold text-[#142544] mb-1">Eucalyptus Hot Towels</h4>
+                <h4 className="font-bold text-[#142544] mb-1">Hot Towels</h4>
                 <p className="text-xs text-[#525c70] leading-relaxed">
-                  Steamed essential-oil towels soothe skin, open pores, and prevent post-shave razor bumps.
+                  Warm steamed towel after every cut and shave.
                 </p>
               </div>
             </div>
@@ -191,9 +163,9 @@ export default function ServicesPage() {
                 <Check className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="font-bold text-[#142544] mb-1">Tailored Pomades & Oils</h4>
+                <h4 className="font-bold text-[#142544] mb-1">Consultation</h4>
                 <p className="text-xs text-[#525c70] leading-relaxed">
-                  Styling matte clays, high-sheen water-based pomades, and cold-pressed cedar beard oils.
+                  We talk through what you want before starting.
                 </p>
               </div>
             </div>

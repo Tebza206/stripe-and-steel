@@ -57,7 +57,7 @@ export default function TermsPage() {
               </h2>
             </div>
             <p className="font-body text-sm sm:text-base text-[#525c70] leading-relaxed">
-              Appointments can be scheduled online via our web reservation system or by contacting our Sandton concierge. Online bookings are allocated dedicated 45 to 75-minute slots to ensure our master craftsmen can deliver meticulous grooming without haste. While walk-in patrons are always welcomed subject to chair availability, clients with confirmed reservations receive immediate priority.
+              Appointments can be scheduled online via our web reservation system or by contacting our Sandton shop. Online bookings are allocated dedicated 45 to 75-minute slots to ensure our barbers have time to give every cut the attention it deserves with a rule that nobody gets rushed. While walk-in patrons are always welcomed subject to chair availability, clients with confirmed reservations receive immediate priority.
             </p>
           </div>
 

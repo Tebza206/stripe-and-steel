@@ -438,7 +438,7 @@ function BookingFormInner() {
                 Book Your Chair
               </h1>
               <p className="text-base text-[#525c70] max-w-lg mx-auto leading-relaxed">
-                Select your service, preferred craftsman, and schedule your appointment. Online bookings receive immediate confirmation.
+                Select your service, preferred barber, and schedule your appointment. Online bookings receive immediate confirmation.
               </p>
 
               {promoCode && (
